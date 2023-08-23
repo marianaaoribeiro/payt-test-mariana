@@ -1,0 +1,7 @@
+$theme-colors: (
+    "primary":#FF6905,
+    //...other variables, you can find them in node_modules/bootstrap/scss/_variables.scss
+);
+
+// import to set changes
+@import "~bootstrap/scss/bootstrap";
