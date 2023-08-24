@@ -4,133 +4,66 @@
     no-body
     >
     <b-card-body>
-      <b-form>
-        <b-row>
-          <b-col
-            cols="12"
-            sm="6"
+      <credit-card />
+      
+      <b-row class="mt-4">
+        <b-col cols="12">
+          <p>
+            Detalhes da compra
+          </p>
+        </b-col>
+        <b-col
+          cols="12"
+          sm="9"
+          >
+          <p class="font-weight-bold">
+            Nome do produto
+          </p>
+        </b-col>
+        <b-col
+          cols="12"
+          sm="3"
+          >
+          <p>R$ 50,00 / mês</p>
+        </b-col>
+        <b-col cols="12">
+          <p>
+            <b-img
+              :src="require('./assets/creditEdit.svg')"
+              alt="Responsive image"
+              />  
+            Essa cobrança aparecerá na sua fatura como: PAYT*NomeDoProduto
+          </p>
+        </b-col>
+        <b-col cols="6">
+          <b-button
+            class="text-white"
+            variant="primary"
+            size="lg"
+            style="min-width: -webkit-fill-available;"
             >
-            <b-row>
-              <b-col cols="12">
-                <b-form-group
-                  id="input-group-1"
-                  label="Número do Cartão"
-                  label-for="input-1"
-                  class="mb-3"
-                >
-                  <b-form-input
-                    id="input-1"
-                    v-model="form.email"
-                    placeholder="Digite somente os números"
-                    required
-                    class=""
-                  />
-                </b-form-group>
-              </b-col>
-              <b-col cols="12">
-                <b-form-group
-                  id="input-group-1"
-                  label="Titular do Cartão"
-                  label-for="input-1"
-                  class="mb-3"
-                >
-                  <b-form-input
-                    id="input-1"
-                    v-model="form.email"
-                    placeholder="Digite o nome impresso no cartão"
-                    required
-                    class=""
-                  />
-                </b-form-group>
-              </b-col>
-              <b-col cols="12">
-                <b-form-group
-                  id="input-group-1"
-                  label="CPF/CNPJ do Titular"
-                  label-for="input-1"
-                  class="mb-3"
-                >
-                  <b-form-input
-                    id="input-1"
-                    v-model="form.email"
-                    placeholder="Para emissão da nota fiscal"
-                    required
-                    class=""
-                  />
-                </b-form-group>
-              </b-col>
-              <b-col
-                cols="12"
-                sm="4"
-                >
-                <b-form-group
-                  id="input-group-2"
-                  label="Validade"
-                  label-for="input-2"
-                  class="mb-3"
-                >
-                  <b-form-select class="form-select" />
-                </b-form-group>
-              </b-col>
-              <b-col
-                cols="12"
-                sm="4"
-                >
-                <b-form-select class="form-select mt-4" />
-              </b-col>
-              <b-col
-                cols="12"
-                sm="4"
-                >
-                <b-form-group
-                  id="input-group-2"
-                  label="Telefone"
-                  label-for="input-2"
-                  class="mb-3"
-                >
-                  <b-form-input
-                    id="input-2"
-                    v-model="form.name"
-                    class=""
-                    placeholder="(00) x0000-0000"
-                    required
-                  />
-                </b-form-group>
-              </b-col>
-
-              <b-col cols="12">
-                <b-form-group
-                  id="input-group-2"
-                  label="Número de parcelas"
-                  label-for="input-2"
-                  class="mb-3"
-                >
-                  <b-form-select class="form-select" />
-                </b-form-group>
-              </b-col>
-            </b-row>
-          </b-col>
-          <b-col
-            cols="12"
-            sm="6"
-            />
-        </b-row>
-      </b-form>
+            Comprar Agora
+            </b-button>
+        </b-col>
+        <b-col
+          cols="12"
+          align="center"
+          class="my-5"
+          >
+          <b-img
+            :src="require('./assets/seguro.svg')"
+            alt="Responsive image"
+           />  
+        </b-col>
+      </b-row>
     </b-card-body>
   </b-card>
 </template>
 <script>
+import creditCard from "@/components/paymentMethods/CreditCard.vue";
 export default {
-  data() {
-    return {
-      form: {
-        email: "",
-        name: "",
-        food: null,
-        checked: [],
-      },
-    };
-  },
-  methods: {},
+  components:{
+    creditCard
+  }
 };
 </script>
