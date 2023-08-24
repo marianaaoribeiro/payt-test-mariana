@@ -30,13 +30,12 @@
             sm="6"
             >
             <b-form-group
-                id="input-group-2"
                 label="E-mail"
                 label-for="input-2"
                 class="mb-3"
                 >
               <b-form-input
-                id="input-2"
+                
                 v-model="form.email"
                 type="email"
                 placeholder="Digite seu email"
@@ -50,13 +49,13 @@
             sm="6"
             >
             <b-form-group
-              id="input-group-2"
+              
               label="Telefone"
               label-for="input-2"
               class="mb-3"
             >
               <b-form-input
-                id="input-2"
+                
                 v-model="form.phone"
                 class="bg-transparent"
                 placeholder="(00) x0000-0000"
@@ -94,10 +93,9 @@
               class="mb-3"
             >
               <b-form-input
-                id="input-1"
                 v-model="form.address"
                 class="bg-transparent"
-                disabled
+                :disabled="enableField && address.logradouro ? true : false"
                 placeholder="Digite seu endereço"
                 required
               />
@@ -108,13 +106,11 @@
             sm="6"
             >
             <b-form-group
-                id="input-group-2"
                 label="Número"
                 label-for="input-2"
                 class="mb-3"
                 >
               <b-form-input
-                id="input-2"
                 v-model="form.num"
                 placeholder="Número"
                 required
@@ -127,13 +123,12 @@
             sm="6"
            >
             <b-form-group
-              id="input-group-2"
               label="Complemento"
               label-for="input-2"
               class="mb-3"
             >
               <b-form-input
-                id="input-2"
+                
                 v-model="form.compl"
                 class="bg-transparent"
                 placeholder="Complemento"
@@ -153,7 +148,7 @@
                 v-model="form.district"
                 placeholder="Digite seu bairro"
                 required
-                disabled
+                :disabled="enableField && address.bairro ? true : false"
                 class="bg-transparent"
               />
             </b-form-group>
@@ -163,17 +158,16 @@
             sm="6"
             >
             <b-form-group
-                id="input-group-2"
                 label="Cidade"
                 label-for="input-2"
                 class="mb-3"
                 >
               <b-form-input
-                id="input-2"
+                
                 v-model="form.city"
                 placeholder="Digite sua cidade"
                 required
-                disabled
+                :disabled="enableField && address.localidade ? true : false"
                 class="bg-transparent"
               />
             </b-form-group>
@@ -183,7 +177,7 @@
             sm="6"
             >
             <b-form-group
-              id="input-group-2"
+              
               label="Estado"
               label-for="input-2"
               class="mb-3"
@@ -191,7 +185,7 @@
               <b-form-select 
               v-model="form.state"
               :options="ufs"
-              disabled
+              :disabled="enableField && address.uf ? true : false"
               class="form-select bg-transparent"
             />
             </b-form-group>
@@ -209,6 +203,7 @@ export default {
   mixins: [globalFunctions],
   data() {
     return {
+      address:{},
       ufs,
       form: {
         name: '',
@@ -223,28 +218,26 @@ export default {
         cep: ''
       },
       cepEncontrado: true,
+      enableField: false,
     };
   },
   methods: {
-    toast1() {
-        this.$bvToast.toast(`Toast with action link`, {
-          href: '#foo',
-          title: 'Example'
-        })},
     searchCep() {
 			if(this.form.cep.length == 9) {
 				axios.get(`https://viacep.com.br/ws/${ this.updatedString(this.form.cep) }/json/`)
 				.then( (response) => {
-          const address = response.data
-          if (!address.erro) {
+          this.address = response.data
+          if (!this.address.erro) {
+            this.enableField = true
             this.cepEncontrado = true
-          this.form.address = address.logradouro
-          this.form.city = address.localidade
-          this.form.district = address.bairro
-          this.form.state = address.uf
+            this.form.address = this.address.logradouro
+            this.form.city = this.address.localidade
+            this.form.district = this.address.bairro
+            this.form.state = this.address.uf
           }
           else{
             this.cepEncontrado = false
+            this.enableField = false
           }
           
         } )
