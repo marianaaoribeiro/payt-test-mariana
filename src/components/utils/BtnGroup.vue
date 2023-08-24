@@ -8,10 +8,11 @@
             sm="4"
         >
       <b-button
-        class="rounded border border-secondary mx-3 my-sm-0 my-2"
+        class="rounded border  mx-3 my-sm-0 my-2"
+        :class="index + 1 == button ? 'border-primary bg-primary01': 'border-secondary'"
         variant="white"
         style="height: 54.33px; width: 160px"
-        @click="$emit('buttonSelect', item)"
+        @click="itemSelected(item)"
         >
         <b-row>
           <b-col cols="4">
@@ -39,6 +40,17 @@ export default {
         buttons: {
             type: Array,
             default: () => []
+        }
+    },
+    data(){
+        return{
+            button: 1,
+        }
+    },
+    methods:{
+        itemSelected(item){
+            this.button = item.id
+            this.$emit('buttonSelect', item)
         }
     }
 }

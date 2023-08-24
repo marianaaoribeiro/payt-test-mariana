@@ -8,46 +8,10 @@
         :buttons="buttons"
         @buttonSelect="getButton"
         />
-      <credit-card />
-      <b-row class="mt-4">
-        <b-col cols="12">
-          <p>
-            Detalhes da compra
-          </p>
-        </b-col>
-        <b-col
-          cols="12"
-          sm="9"
-          >
-          <p class="font-weight-bold">
-            Nome do produto
-          </p>
-        </b-col>
-        <b-col
-          cols="12"
-          sm="3"
-          >
-          <p>R$ 50,00 / mês</p>
-        </b-col>
-        <b-col cols="12">
-          <p>
-            <b-img
-              :src="require('./assets/creditEdit.svg')"
-              alt="Responsive image"
-              />  
-            Essa cobrança aparecerá na sua fatura como: PAYT*NomeDoProduto
-          </p>
-        </b-col>
-        <b-col cols="6">
-          <b-button
-            class="text-white"
-            variant="primary"
-            size="lg"
-            style="min-width: -webkit-fill-available;"
-            >
-            Comprar Agora
-            </b-button>
-        </b-col>
+      <credit-card v-if="itemSelected == 1" />
+      <pix-transfer v-if="itemSelected == 2" />
+      <bank-slip v-if="itemSelected == 3" />
+      <b-row>
         <b-col
           cols="12"
           align="center"
@@ -64,14 +28,19 @@
 </template>
 <script>
 import creditCard from "@/components/paymentMethods/CreditCard.vue";
+import pixTransfer from "@/components/paymentMethods/PixTransfer.vue";
+import bankSlip from "@/components/paymentMethods/BankSlip.vue";
 import btnGroup from "@/components/utils/BtnGroup.vue";
 export default {
   components: {
     creditCard,
+    pixTransfer,
+    bankSlip,
     btnGroup
   },
   data() {
     return {
+      itemSelected: 1,
       buttons: [
         {
           id: 1,
@@ -93,7 +62,7 @@ export default {
   },
   methods:{
     getButton(value){
-      console.log(value);
+      this.itemSelected = value.id
     }
   },
 };

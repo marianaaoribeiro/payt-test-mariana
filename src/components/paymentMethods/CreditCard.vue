@@ -168,6 +168,46 @@
             </b-card>
           </b-col>
         </b-row>
+        <b-row class="mt-4">
+        <b-col cols="12">
+          <p>
+            Detalhes da compra
+          </p>
+        </b-col>
+        <b-col
+          cols="12"
+          sm="9"
+          >
+          <p class="font-weight-bold">
+            Nome do produto
+          </p>
+        </b-col>
+        <b-col
+          cols="12"
+          sm="3"
+          >
+          <p>R$ 50,00 / mês</p>
+        </b-col>
+        <b-col cols="12">
+          <p>
+            <b-img
+              :src="require('../assets/creditEdit.svg')"
+              alt="Responsive image"
+              />  
+            Essa cobrança aparecerá na sua fatura como: PAYT*NomeDoProduto
+          </p>
+        </b-col>
+        <b-col cols="6">
+          <b-button
+            class="text-white"
+            variant="primary"
+            size="lg"
+            style="min-width: -webkit-fill-available;"
+            >
+            Comprar Agora
+            </b-button>
+        </b-col>
+      </b-row>
       </b-form>
 </template>
 <script>
