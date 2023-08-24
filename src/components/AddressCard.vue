@@ -18,7 +18,7 @@
             >
               <b-form-input
                 id="input-1"
-                v-model="form.email"
+                v-model="form.name"
                 placeholder="Digite seu nome completo"
                 required
                 class="bg-transparent"
@@ -37,7 +37,7 @@
                 >
               <b-form-input
                 id="input-2"
-                v-model="form.name"
+                v-model="form.email"
                 type="email"
                 placeholder="Digite seu email"
                 required
@@ -57,13 +57,35 @@
             >
               <b-form-input
                 id="input-2"
-                v-model="form.name"
+                v-model="form.phone"
                 class="bg-transparent"
                 placeholder="(00) x0000-0000"
                 required
               />
             </b-form-group>
           </b-col>
+          <b-col cols="6">
+            <b-form-group
+              id="input-group-1"
+              label="CEP"
+              label-for="input-1"
+              class="mb-3"
+            >
+              <b-form-input
+                v-model="form.cep"
+                v-mask="'#####-###'"
+                class="bg-transparent"
+                placeholder="Digite seu cep"
+                required
+                @input="searchCep()"
+              />
+              <span
+                v-if="!cepEncontrado"
+                class="text-error"
+                >CEP não encontrado</span>
+            </b-form-group>
+          </b-col>
+          <b-col cols="6" />
           <b-col cols="12">
             <b-form-group
               id="input-group-1"
@@ -73,8 +95,9 @@
             >
               <b-form-input
                 id="input-1"
-                v-model="form.email"
+                v-model="form.address"
                 class="bg-transparent"
+                disabled
                 placeholder="Digite seu endereço"
                 required
               />
@@ -92,7 +115,7 @@
                 >
               <b-form-input
                 id="input-2"
-                v-model="form.name"
+                v-model="form.num"
                 placeholder="Número"
                 required
                 class="bg-transparent"
@@ -111,7 +134,7 @@
             >
               <b-form-input
                 id="input-2"
-                v-model="form.name"
+                v-model="form.compl"
                 class="bg-transparent"
                 placeholder="Complemento"
                 required
@@ -127,9 +150,10 @@
             >
               <b-form-input
                 id="input-1"
-                v-model="form.email"
+                v-model="form.district"
                 placeholder="Digite seu bairro"
                 required
+                disabled
                 class="bg-transparent"
               />
             </b-form-group>
@@ -146,9 +170,10 @@
                 >
               <b-form-input
                 id="input-2"
-                v-model="form.name"
+                v-model="form.city"
                 placeholder="Digite sua cidade"
                 required
+                disabled
                 class="bg-transparent"
               />
             </b-form-group>
@@ -164,6 +189,9 @@
               class="mb-3"
             >
               <b-form-select 
+              v-model="form.state"
+              :options="ufs"
+              disabled
               class="form-select bg-transparent"
             />
             </b-form-group>
@@ -174,25 +202,54 @@
   </b-card>
 </template>
 <script>
+import axios from 'axios'
+import ufs from './ufs.js'
+import {globalFunctions} from '../shared/mixins'
 export default {
+  mixins: [globalFunctions],
   data() {
     return {
+      ufs,
       form: {
-        email: "",
-        name: "",
-        food: null,
-        checked: [],
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        num: '',
+        compl: '',
+        district: '',
+        city: '',
+        state: '',
+        cep: ''
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
-      ],
+      cepEncontrado: true,
     };
   },
   methods: {
+    toast1() {
+        this.$bvToast.toast(`Toast with action link`, {
+          href: '#foo',
+          title: 'Example'
+        })},
+    searchCep() {
+			if(this.form.cep.length == 9) {
+				axios.get(`https://viacep.com.br/ws/${ this.updatedString(this.form.cep) }/json/`)
+				.then( (response) => {
+          const address = response.data
+          if (!address.erro) {
+            this.cepEncontrado = true
+          this.form.address = address.logradouro
+          this.form.city = address.localidade
+          this.form.district = address.bairro
+          this.form.state = address.uf
+          }
+          else{
+            this.cepEncontrado = false
+          }
+          
+        } )
+			}
+		},
     onSubmit(event) {
       event.preventDefault();
       alert(JSON.stringify(this.form));

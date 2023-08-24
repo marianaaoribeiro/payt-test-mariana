@@ -53,7 +53,10 @@
         </b-form-group>
       </b-col>
       <b-col cols="12" />
-      <b-col cols="6">
+      <b-col
+        cols="12"
+        sm="6"
+        >
         <b-button
           class="text-white"
           variant="primary"
