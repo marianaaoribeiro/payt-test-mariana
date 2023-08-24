@@ -1,5 +1,9 @@
+.font-weight-bold {
+    font-weight: bold;
+}
 $theme-colors: (
     "primary":#FF6905,
+    "secondary": #B0B0B0,
     //...other variables, you can find them in node_modules/bootstrap/scss/_variables.scss
 );
 
