@@ -5,7 +5,6 @@
     >
     <b-card-body>
       <b-form
-        v-if="show"
         @submit="onSubmit"
         @reset="onReset"
         >
@@ -191,7 +190,6 @@ export default {
         "Tomatoes",
         "Corn",
       ],
-      show: true,
     };
   },
   methods: {
