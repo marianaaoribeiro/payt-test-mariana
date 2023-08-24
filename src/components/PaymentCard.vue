@@ -4,8 +4,11 @@
     no-body
     >
     <b-card-body>
+      <btn-group
+        :buttons="buttons"
+        @buttonSelect="getButton"
+        />
       <credit-card />
-      
       <b-row class="mt-4">
         <b-col cols="12">
           <p>
@@ -61,9 +64,37 @@
 </template>
 <script>
 import creditCard from "@/components/paymentMethods/CreditCard.vue";
+import btnGroup from "@/components/utils/BtnGroup.vue";
 export default {
-  components:{
-    creditCard
-  }
+  components: {
+    creditCard,
+    btnGroup
+  },
+  data() {
+    return {
+      buttons: [
+        {
+          id: 1,
+          name:'Cartão de crédito',
+          image: require('./assets/iconCredit.svg')
+        },
+        {
+          id: 2,
+          name:'Pix',
+          image: require('./assets/iconPix.svg')
+        },
+        {
+          id: 3,
+          name:'Boleto',
+          image: require('./assets/iconBar.svg')
+        },
+      ]
+    };
+  },
+  methods:{
+    getButton(value){
+      console.log(value);
+    }
+  },
 };
 </script>
