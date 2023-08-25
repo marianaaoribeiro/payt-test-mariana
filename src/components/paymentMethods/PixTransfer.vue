@@ -43,11 +43,10 @@
         <b-form-group
           id="input-group-2"
           label="CPF/CNPJ (Para emissão de Nota Fiscal)"
-          label-for="input-2"
           class="mb-3"
         >
           <b-form-input
-            id="input-1"
+            v-mask="['###.###.###-##', '##.###.###/####-##']"
             required
             />
         </b-form-group>

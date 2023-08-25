@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-form>
+    <b-form @submit="onSubmit">
     <b-row class="justify-content-center">
       <b-col
         cols="12"
@@ -34,5 +34,12 @@ export default {
     addressCard,
     PaymentCard
   },
+  methods:{
+    onSubmit(event) {
+      console.log('Purchase');
+      event.preventDefault();
+      alert(event);
+    },
+  }
 };
 </script>

@@ -4,10 +4,6 @@
     no-body
     >
     <b-card-body>
-      <!-- <b-form
-        @submit="onSubmit"
-        @reset="onReset"
-        > -->
         <b-row>
           <b-col cols="12">
             <b-form-group
@@ -15,11 +11,13 @@
               class="mb-3"
             >
               <b-form-input
-                id="input-1"
-                v-model="form.name"
+                v-model="addressData.name"
                 placeholder="Digite seu nome completo"
                 required
                 class="bg-transparent"
+                @change="namePhoneEmail"
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -29,15 +27,17 @@
             >
             <b-form-group
                 label="E-mail"
-                label-for="input-2"
                 class="mb-3"
                 >
               <b-form-input
-                v-model="form.email"
+                v-model="addressData.email"
                 type="email"
                 placeholder="Digite seu email"
                 required
                 class="bg-transparent"
+                @change="namePhoneEmail"
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -47,14 +47,17 @@
             >
             <b-form-group
               label="Telefone"
-              label-for="input-2"
               class="mb-3"
             >
               <b-form-input
-                v-model="form.phone"
+                v-model="addressData.phone"
+                v-mask="'(##) ####-#####'"
                 class="bg-transparent"
                 placeholder="(00) x0000-0000"
                 required
+                @input="saveFields"
+                @change="namePhoneEmail"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -64,12 +67,13 @@
               class="mb-3"
             >
               <b-form-input
-                v-model="form.cep"
+                v-model="addressData.cep"
                 v-mask="'#####-###'"
                 class="bg-transparent"
                 placeholder="Digite seu cep"
                 required
                 @input="searchCep()"
+                @focus="focusField"
               />
               <span
                 v-if="!cepEncontrado"
@@ -84,11 +88,13 @@
               class="mb-3"
             >
               <b-form-input
-                v-model="form.address"
+                v-model="addressData.address"
                 class="bg-transparent"
                 :disabled="enableField && address.logradouro ? true : false"
                 placeholder="Digite seu endereço"
                 required
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -98,14 +104,15 @@
             >
             <b-form-group
                 label="Número"
-                label-for="input-2"
                 class="mb-3"
                 >
               <b-form-input
-                v-model="form.num"
+                v-model="addressData.num"
                 placeholder="Número"
                 required
                 class="bg-transparent"
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -115,15 +122,15 @@
            >
             <b-form-group
               label="Complemento"
-              label-for="input-2"
               class="mb-3"
             >
               <b-form-input
-                
-                v-model="form.compl"
+                v-model="addressData.compl"
                 class="bg-transparent"
                 placeholder="Complemento"
                 required
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -133,12 +140,13 @@
               class="mb-3"
             >
               <b-form-input
-                id="input-1"
-                v-model="form.district"
+                v-model="addressData.district"
                 placeholder="Digite seu bairro"
                 required
                 :disabled="enableField && address.bairro ? true : false"
                 class="bg-transparent"
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -148,16 +156,16 @@
             >
             <b-form-group
                 label="Cidade"
-                label-for="input-2"
                 class="mb-3"
                 >
               <b-form-input
-                
-                v-model="form.city"
+                v-model="addressData.city"
                 placeholder="Digite sua cidade"
                 required
                 :disabled="enableField && address.localidade ? true : false"
                 class="bg-transparent"
+                @input="saveFields"
+                @focus="focusField"
               />
             </b-form-group>
           </b-col>
@@ -166,16 +174,16 @@
             sm="6"
             >
             <b-form-group
-              
               label="Estado"
-              label-for="input-2"
               class="mb-3"
             >
               <b-form-select 
-              v-model="form.state"
+              v-model="addressData.state"
               :options="ufs"
               :disabled="enableField && address.uf ? true : false"
               class="form-select bg-transparent"
+              @input="saveFields"
+              @focus="focusField"
             />
             </b-form-group>
           </b-col>
@@ -193,7 +201,7 @@ export default {
     return {
       address:{},
       ufs,
-      form: {
+      addressData: {
         name: '',
         email: '',
         phone: '',
@@ -210,18 +218,33 @@ export default {
     };
   },
   methods: {
+    namePhoneEmail(){
+      if (this.$store.getters.addToCart) {
+        console.log('AddToCart');
+      }
+    },
+    saveFields(){
+      this.$store.commit('setAddressData', this.addressData)
+    },
+    focusField(){
+      if (this.$store.getters.initiateCheckout && focus) {
+        console.log('InitiateCheckout');
+      }
+      this.saveFields()
+    },
     searchCep() {
-			if(this.form.cep.length == 9) {
-				axios.get(`https://viacep.com.br/ws/${ this.updatedString(this.form.cep) }/json/`)
+			if(this.addressData.cep.length == 9) {
+				axios.get(`https://viacep.com.br/ws/${ this.updatedString(this.addressData.cep) }/json/`)
 				.then( (response) => {
           this.address = response.data
           if (!this.address.erro) {
             this.enableField = true
             this.cepEncontrado = true
-            this.form.address = this.address.logradouro
-            this.form.city = this.address.localidade
-            this.form.district = this.address.bairro
-            this.form.state = this.address.uf
+            this.addressData.address = this.address.logradouro
+            this.addressData.city = this.address.localidade
+            this.addressData.district = this.address.bairro
+            this.addressData.state = this.address.uf
+            this.saveFields()
           }
           else{
             this.cepEncontrado = false
@@ -231,23 +254,6 @@ export default {
         } )
 			}
 		},
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    onReset(event) {
-      event.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    },
   },
 };
 </script>

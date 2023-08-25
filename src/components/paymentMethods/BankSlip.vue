@@ -47,9 +47,8 @@
           class="mb-3"
         >
           <b-form-input
-            id="input-1"
+            v-mask="['###.###.###-##', '##.###.###/####-##']"
             required
-            class=""
             />
         </b-form-group>
       </b-col>

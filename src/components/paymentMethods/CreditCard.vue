@@ -8,9 +8,7 @@
         <b-row>
           <b-col cols="12">
             <b-form-group
-              id="input-group-1"
               label="Número do Cartão"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
@@ -24,9 +22,7 @@
           </b-col>
           <b-col cols="12">
             <b-form-group
-              id="input-group-1"
               label="Titular do Cartão"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
@@ -38,9 +34,7 @@
           </b-col>
           <b-col cols="12">
             <b-form-group
-              id="input-group-1"
               label="CPF/CNPJ do Titular"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
