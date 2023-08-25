@@ -72,6 +72,7 @@
                 class="bg-transparent"
                 placeholder="Digite seu cep"
                 required
+                @change="cepNumber()"
                 @input="searchCep()"
                 @focus="focusField"
               />
@@ -111,6 +112,7 @@
                 placeholder="Número"
                 required
                 class="bg-transparent"
+                @change="cepNumber"
                 @input="saveFields"
                 @focus="focusField"
               />
@@ -221,6 +223,11 @@ export default {
     namePhoneEmail(){
       if (this.$store.getters.addToCart) {
         console.log('AddToCart');
+      }
+    },
+    cepNumber(){
+      if (this.$store.getters.fillAddress) {
+        console.log('FillAddress');
       }
     },
     saveFields(){

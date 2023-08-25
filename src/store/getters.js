@@ -11,6 +11,13 @@ const getters = {
        }
        return false
     },
+    fillAddress: state => {
+        let address = state.addressData
+        if (address.cep && address.num) {
+             return true
+        }
+        return false
+     },
     addressData: (state) => state.addressData,
 }
 export default getters
