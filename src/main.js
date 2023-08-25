@@ -12,6 +12,7 @@ Vue.use(IconsPlugin);
 Vue.use(BootstrapVue);
 Vue.use(VueTheMask)
 Vue.config.productionTip = false;
+Vue.prototype.window = window;
 
 new Vue({
   router,

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container @mouseleave="mouseleave">
     <b-form @submit.prevent="onSubmit(true)">
     <b-row class="justify-content-center">
       <b-col
@@ -28,6 +28,7 @@
 import productsCard from "@/components/ProductsCard.vue";
 import addressCard from "@/components/AddressCard.vue";
 import PaymentCard from '@/components/PaymentCard.vue';
+
 export default {
   components: {
     productsCard,
@@ -39,7 +40,17 @@ export default {
       valid: false
     }
   },
-  methods:{
+  created(){
+  this.window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+    console.log('CloseWindow')
+    e.returnValue = '';
+    });
+  },
+  methods: {
+    mouseleave(){
+      console.log('ChangeWindow');
+    },
     validate(){
       console.log('PurchaseFail');
     },
