@@ -16,6 +16,7 @@
                 v-mask="'#### #### #### ####'"
                 placeholder="Digite somente os números"
                 required
+                @invalid="$emit('validate')"
                 @change="checkFields"
                 @focus="focusField"
                 @input="testNum"
@@ -31,6 +32,7 @@
                 v-model="credit.name"
                 placeholder="Digite o nome impresso no cartão"
                 required
+                @invalid="$emit('validate')"
                 @change="checkFields"
                 @focus="focusField"
                 @input="saveFields"
@@ -47,6 +49,7 @@
                 v-mask="['###.###.###-##', '##.###.###/####-##']"
                 placeholder="Para emissão da nota fiscal"
                 required
+                @invalid="$emit('validate')"
                 @change="checkFields"
                 @focus="focusField"
                 @input="saveFields"
@@ -67,6 +70,7 @@
                 :options="mounths"
                 class="form-select"
                 required
+                @invalid="$emit('validate')"
                 @change="checkFields"
                 @focus="focusField"
                 @input="saveFields"
@@ -82,6 +86,7 @@
               :options="years"
               class="form-select mt-4"
               required
+              @invalid="$emit('validate')"
               @change="checkFields"
               @focus="focusField"
               @input="saveFields"
@@ -101,6 +106,7 @@
                 v-mask="'(##) ####-#####'"
                 placeholder="(00) x0000-0000"
                 required
+                @invalid="$emit('validate')"
                 @change="checkFields"
                 @focus="focusField"
                 @input="saveFields"
@@ -117,6 +123,8 @@
                 v-model="credit.installments"
                 :options="installments"
                 class="form-select"
+                required
+                @invalid="$emit('validate')"
                 @change="checkFields"
                 @focus="focusField"
                 @input="saveFields"

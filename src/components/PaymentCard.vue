@@ -8,9 +8,18 @@
           :buttons="buttons"
           @buttonSelect="getButton"
           />
-        <credit-card v-if="itemSelected == 1" />
-        <pix-transfer v-if="itemSelected == 2" />
-        <bank-slip v-if="itemSelected == 3" />
+        <credit-card
+          v-if="itemSelected == 1"
+          @validate="$emit('validateFields')"
+          />
+        <pix-transfer
+          v-if="itemSelected == 2"
+          @validate="$emit('validateFields')"
+          />
+        <bank-slip
+          v-if="itemSelected == 3"
+          @validate="$emit('validateFields')"
+          />
         <b-row>
           <b-col
           cols="12"

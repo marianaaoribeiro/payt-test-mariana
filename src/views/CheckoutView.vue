@@ -1,24 +1,24 @@
 <template>
   <b-container>
-    <b-form @submit="onSubmit">
+    <b-form @submit.prevent="onSubmit(true)">
     <b-row class="justify-content-center">
       <b-col
         cols="12"
         sm="8"
       >
-        <products-card />
+        <products-card @validateFields="validate" />
       </b-col>
       <b-col 
         cols="12" 
         sm="8"
       >
-        <address-card />
+        <address-card @validateFields="validate" />
       </b-col>
       <b-col 
         cols="12" 
         sm="8"
       >
-        <payment-card />
+        <payment-card @validateFields="validate" />
       </b-col>
     </b-row>
   </b-form>
@@ -34,11 +34,17 @@ export default {
     addressCard,
     PaymentCard
   },
+  data(){
+    return{
+      valid: false
+    }
+  },
   methods:{
-    onSubmit(event) {
+    validate(){
+      console.log('PurchaseFail');
+    },
+    onSubmit() {
       console.log('Purchase');
-      event.preventDefault();
-      alert(event);
     },
   }
 };

@@ -49,6 +49,7 @@
             v-model="payment.cpfCnpj"
             v-mask="['###.###.###-##', '##.###.###/####-##']"
             required
+            @invalid="$emit('validate')"
             @change="checkFields"
             @focus="focusField"
             @input="saveFields"

@@ -15,6 +15,7 @@
                 placeholder="Digite seu nome completo"
                 required
                 class="bg-transparent"
+                @invalid="$emit('validateFields')"
                 @change="namePhoneEmail"
                 @input="saveFields"
                 @focus="focusField"
@@ -35,6 +36,7 @@
                 placeholder="Digite seu email"
                 required
                 class="bg-transparent"
+                @invalid="$emit('validateFields')"
                 @change="namePhoneEmail"
                 @input="saveFields"
                 @focus="focusField"
@@ -55,6 +57,7 @@
                 class="bg-transparent"
                 placeholder="(00) x0000-0000"
                 required
+                @invalid="$emit('validateFields')"
                 @input="saveFields"
                 @change="namePhoneEmail"
                 @focus="focusField"
@@ -72,6 +75,7 @@
                 class="bg-transparent"
                 placeholder="Digite seu cep"
                 required
+                @invalid="$emit('validateFields')"
                 @change="cepNumber()"
                 @input="searchCep()"
                 @focus="focusField"
@@ -94,6 +98,7 @@
                 :disabled="enableField && address.logradouro ? true : false"
                 placeholder="Digite seu endereço"
                 required
+                @invalid="$emit('validateFields')"
                 @input="saveFields"
                 @focus="focusField"
               />
@@ -112,6 +117,7 @@
                 placeholder="Número"
                 required
                 class="bg-transparent"
+                @invalid="$emit('validateFields')"
                 @change="cepNumber"
                 @input="saveFields"
                 @focus="focusField"
@@ -131,6 +137,7 @@
                 class="bg-transparent"
                 placeholder="Complemento"
                 required
+                @invalid="$emit('validateFields')"
                 @input="saveFields"
                 @focus="focusField"
               />
@@ -147,6 +154,7 @@
                 required
                 :disabled="enableField && address.bairro ? true : false"
                 class="bg-transparent"
+                @invalid="$emit('validateFields')"
                 @input="saveFields"
                 @focus="focusField"
               />
@@ -166,6 +174,7 @@
                 required
                 :disabled="enableField && address.localidade ? true : false"
                 class="bg-transparent"
+                @invalid="$emit('validateFields')"
                 @input="saveFields"
                 @focus="focusField"
               />
@@ -184,6 +193,7 @@
               :options="ufs"
               :disabled="enableField && address.uf ? true : false"
               class="form-select bg-transparent"
+              @invalid="$emit('validateFields')"
               @input="saveFields"
               @focus="focusField"
             />
