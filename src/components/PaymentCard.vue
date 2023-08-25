@@ -1,28 +1,42 @@
 <template>
     <b-card
-    class="border-secondary mt-4"
-    no-body
-    >
+      class="border-secondary mt-4"
+      no-body
+      >
     <b-card-body>
-      <btn-group
-        :buttons="buttons"
-        @buttonSelect="getButton"
-        />
-      <credit-card v-if="itemSelected == 1" />
-      <pix-transfer v-if="itemSelected == 2" />
-      <bank-slip v-if="itemSelected == 3" />
-      <b-row>
-        <b-col
+        <btn-group
+          :buttons="buttons"
+          @buttonSelect="getButton"
+          />
+        <credit-card v-if="itemSelected == 1" />
+        <pix-transfer v-if="itemSelected == 2" />
+        <bank-slip v-if="itemSelected == 3" />
+        <b-row>
+          <b-col
           cols="12"
-          align="center"
-          class="my-5"
+          sm="6"
           >
-          <b-img
-            :src="require('./assets/seguro.svg')"
-            alt="Responsive image"
-           />  
+          <b-button
+            class="text-white"
+            variant="primary"
+            type="submit"
+            size="lg"
+            style="min-width: -webkit-fill-available"
+          >
+            Comprar Agora
+          </b-button>
         </b-col>
-      </b-row>
+          <b-col
+            cols="12"
+            align="center"
+            class="my-5"
+            >
+            <b-img
+              :src="require('./assets/seguro.svg')"
+              alt="Responsive image"
+            />  
+          </b-col>
+        </b-row>
     </b-card-body>
   </b-card>
 </template>
@@ -30,7 +44,7 @@
 import creditCard from "@/components/paymentMethods/CreditCard.vue";
 import pixTransfer from "@/components/paymentMethods/PixTransfer.vue";
 import bankSlip from "@/components/paymentMethods/BankSlip.vue";
-import btnGroup from "@/components/utils/BtnGroup.vue";
+import btnGroup from "@/components/shared/BtnGroup.vue";
 export default {
   components: {
     creditCard,

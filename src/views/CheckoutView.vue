@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <b-form>
     <b-row class="justify-content-center">
       <b-col
         cols="12"
@@ -20,6 +21,7 @@
         <payment-card />
       </b-col>
     </b-row>
+  </b-form>
   </b-container>
 </template>
 <script>

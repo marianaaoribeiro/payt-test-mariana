@@ -1,5 +1,5 @@
 <template>
-  <b-form>
+  <div>
     <b-row>
       <b-col
         cols="12"
@@ -205,21 +205,8 @@
           Essa cobrança aparecerá na sua fatura como: PAYT*NomeDoProduto
         </p>
       </b-col>
-      <b-col
-        cols="12"
-        sm="6"
-        >
-        <b-button
-          class="text-white"
-          variant="primary"
-          size="lg"
-          style="min-width: -webkit-fill-available"
-        >
-          Comprar Agora
-        </b-button>
-      </b-col>
     </b-row>
-  </b-form>
+    </div>
 </template>
 <script>
 export default {

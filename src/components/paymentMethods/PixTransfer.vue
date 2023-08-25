@@ -1,5 +1,5 @@
 <template>
-  <b-form>
+  <div>
     <b-row>
         <b-col
         cols="12"
@@ -53,24 +53,11 @@
         </b-form-group>
       </b-col>
       <b-col cols="12" />
-      <b-col
-        cols="12"
-        sm="6"
-        >
-        <b-button
-          class="text-white"
-          variant="primary"
-          size="lg"
-          style="min-width: -webkit-fill-available"
-        >
-          Comprar Agora
-        </b-button>
-      </b-col>
     </b-row>
-  </b-form>
+  </div>
 </template>
 <script>
-import infoCards from "@/components/utils/InfoCards.vue";
+import infoCards from "@/components/shared/InfoCards.vue";
 
 export default {
   components: {

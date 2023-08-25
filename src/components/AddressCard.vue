@@ -4,16 +4,14 @@
     no-body
     >
     <b-card-body>
-      <b-form
+      <!-- <b-form
         @submit="onSubmit"
         @reset="onReset"
-        >
+        > -->
         <b-row>
           <b-col cols="12">
             <b-form-group
-              id="input-group-1"
               label="Nome Completo"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
@@ -35,7 +33,6 @@
                 class="mb-3"
                 >
               <b-form-input
-                
                 v-model="form.email"
                 type="email"
                 placeholder="Digite seu email"
@@ -49,13 +46,11 @@
             sm="6"
             >
             <b-form-group
-              
               label="Telefone"
               label-for="input-2"
               class="mb-3"
             >
               <b-form-input
-                
                 v-model="form.phone"
                 class="bg-transparent"
                 placeholder="(00) x0000-0000"
@@ -65,9 +60,7 @@
           </b-col>
           <b-col cols="6">
             <b-form-group
-              id="input-group-1"
               label="CEP"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
@@ -87,9 +80,7 @@
           <b-col cols="6" />
           <b-col cols="12">
             <b-form-group
-              id="input-group-1"
               label="Endereço"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
@@ -138,9 +129,7 @@
           </b-col>
           <b-col cols="12">
             <b-form-group
-              id="input-group-1"
               label="Bairro"
-              label-for="input-1"
               class="mb-3"
             >
               <b-form-input
@@ -191,7 +180,6 @@
             </b-form-group>
           </b-col>
         </b-row>
-      </b-form>
     </b-card-body>
   </b-card>
 </template>
