@@ -234,7 +234,7 @@ export default {
       this.$store.commit('setAddressData', this.addressData)
     },
     focusField(){
-      if (this.$store.getters.initiateCheckout && focus) {
+      if (this.$store.getters.initiateCheckout) {
         console.log('InitiateCheckout');
       }
       this.saveFields()

@@ -1,6 +1,7 @@
 const state = {
     addressData: {},
-    paymentData: {}
+    paymentData: {},
+    paymentMethod: 1
   }
   
   export default state

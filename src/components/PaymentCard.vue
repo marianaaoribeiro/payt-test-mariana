@@ -77,6 +77,8 @@ export default {
   methods:{
     getButton(value){
       this.itemSelected = value.id
+      this.$store.commit('setPaymentMethod', this.itemSelected)
+      this.$store.commit('setPaymentData', {})
     }
   },
 };

@@ -18,6 +18,17 @@ const getters = {
         }
         return false
      },
+    addPaymentInfo: state => {
+       let method = state.paymentMethod
+       let payment = state.paymentData
+
+       if (method == 1 && payment.num && payment.name && payment.cpfCnpj && payment.mounth && payment.year && payment.phone && payment.installments) {
+            return true
+        } else if(method == 2 && payment.cpfCnpj || method == 3 && payment.cpfCnpj ){
+            return true
+        }
+        return false
+    },
     addressData: (state) => state.addressData,
 }
 export default getters

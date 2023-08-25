@@ -46,8 +46,12 @@
           class="mb-3"
         >
           <b-form-input
+            v-model="payment.cpfCnpj"
             v-mask="['###.###.###-##', '##.###.###/####-##']"
             required
+            @change="checkFields"
+            @focus="focusField"
+            @input="saveFields"
             />
         </b-form-group>
       </b-col>
@@ -64,6 +68,9 @@ export default {
   },
   data() {
     return {
+      payment:{
+        cpfCnpj: ''
+      },
       cards: [
         {
           image: require("./assets/clock.svg"),
@@ -88,6 +95,21 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    checkFields(){
+      if (this.$store.getters.addPaymentInfo) {
+        console.log('AddPaymentInfo');
+      }
+    },
+    focusField(){
+      if (this.$store.getters.initiateCheckout) {
+        console.log('InitiateCheckout');
+      }
+      this.saveFields()
+    },
+    saveFields(){
+      this.$store.commit('setPaymentData', this.payment)
+    }
+  },
 };
 </script>

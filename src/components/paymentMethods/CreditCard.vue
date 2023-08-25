@@ -16,6 +16,8 @@
                 v-mask="'#### #### #### ####'"
                 placeholder="Digite somente os números"
                 required
+                @change="checkFields"
+                @focus="focusField"
                 @input="testNum"
               />
             </b-form-group>
@@ -29,6 +31,9 @@
                 v-model="credit.name"
                 placeholder="Digite o nome impresso no cartão"
                 required
+                @change="checkFields"
+                @focus="focusField"
+                @input="saveFields"
               />
             </b-form-group>
           </b-col>
@@ -42,6 +47,9 @@
                 v-mask="['###.###.###-##', '##.###.###/####-##']"
                 placeholder="Para emissão da nota fiscal"
                 required
+                @change="checkFields"
+                @focus="focusField"
+                @input="saveFields"
               />
             </b-form-group>
           </b-col>
@@ -59,6 +67,9 @@
                 :options="mounths"
                 class="form-select"
                 required
+                @change="checkFields"
+                @focus="focusField"
+                @input="saveFields"
               />
             </b-form-group>
           </b-col>
@@ -71,6 +82,9 @@
               :options="years"
               class="form-select mt-4"
               required
+              @change="checkFields"
+              @focus="focusField"
+              @input="saveFields"
             />
           </b-col>
           <b-col
@@ -87,6 +101,9 @@
                 v-mask="'(##) ####-#####'"
                 placeholder="(00) x0000-0000"
                 required
+                @change="checkFields"
+                @focus="focusField"
+                @input="saveFields"
               />
             </b-form-group>
           </b-col>
@@ -100,6 +117,9 @@
                 v-model="credit.installments"
                 :options="installments"
                 class="form-select"
+                @change="checkFields"
+                @focus="focusField"
+                @input="saveFields"
               />
             </b-form-group>
           </b-col>
@@ -269,6 +289,20 @@ export default {
     };
   },
   methods: {
+    focusField(){
+      if (this.$store.getters.initiateCheckout) {
+        console.log('InitiateCheckout');
+      }
+      this.saveFields()
+    },
+    checkFields(){
+      if (this.$store.getters.addPaymentInfo) {
+        console.log('AddPaymentInfo');
+      }
+    },
+    saveFields(){
+      this.$store.commit('setPaymentData', this.credit)
+    },
     testNum() {
       const number = this.credit.num.replace(/\s/g, "");
       if (number.length > 0) {
@@ -281,6 +315,7 @@ export default {
       } else {
         this.banner = "";
       }
+      this.saveFields()
     },
   },
 };

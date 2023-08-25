@@ -5,6 +5,9 @@ const mutations = {
     setPaymentData(state, value) {
       state.paymentData = value
     },
+    setPaymentMethod(state, value) {
+      state.paymentMethod = value
+    },
   }
   
   export default mutations
